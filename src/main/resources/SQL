@@ -1,0 +1,82 @@
+/*Script SQL de la base de datos para el sistema de Ecomerce
+ By: JEYSSON REINO*/
+
+CREATE DATABASE ecomerce;
+USE ecomerce;
+
+CREATE TABLE categoria(
+id INTEGER PRIMARY KEY AUTO_INCREMENT,
+nombre VARCHAR(255) NOT NULL
+);
+ALTER TABLE categoria AUTO_INCREMENT = 1;
+
+CREATE TABLE tienda(
+id INTEGER PRIMARY KEY AUTO_INCREMENT,
+nombre VARCHAR(255) NOT NULL,
+representante VARCHAR(255) NOT NULL,
+telefono VARCHAR(10) NOT NULL,
+estado_de_suscripcion VARCHAR(50)
+);
+ALTER TABLE tienda AUTO_INCREMENT = 1;
+
+CREATE TABLE producto(
+id INTEGER PRIMARY KEY AUTO_INCREMENT,
+nombre VARCHAR(255) NOT NULL,
+descripcion VARCHAR(255) NOT NULL,
+cantidad INTEGER NOT NULL,
+precio DECIMAL(10,2) NOT NULL,
+genero VARCHAR(1) NOT NULL,
+talla VARCHAR(255) NOT NULL,
+tipo_material VARCHAR(255),
+descuento DECIMAL(4,2),
+marca VARCHAR(255),
+imagen_principal VARCHAR(255) NOT NULL,
+imagen_2 VARCHAR(255),
+imagen_3 VARCHAR(255),
+imagen_4 VARCHAR(255),
+imagen_5 VARCHAR(255),
+id_categoria INTEGER NOT NUll,
+FOREIGN KEY (id_categoria) REFERENCES categoria(id) ON DELETE CASCADE ON UPDATE CASCADE,
+id_tienda INTEGER NOT NULL,
+FOREIGN KEY (id_tienda) REFERENCES tienda(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+ALTER TABLE producto AUTO_INCREMENT = 1000;
+
+CREATE TABLE usuario(
+id INTEGER PRIMARY KEY AUTO_INCREMENT,
+nombre1 VARCHAR(255) NOT NULL,
+nombre2 VARCHAR(255),
+apellido1 VARCHAR(255) NOT NULL,
+apellido2 VARCHAR(255) NOT NULL,
+fecha_nacimiento DATE NOT NULL,
+sexo VARCHAR(1),
+telefono VARCHAR(10),
+correo VARCHAR(255) NOT NULL,
+contrasena VARCHAR(255) NOT NULL,
+fecha_y_hora_de_registro DATETIME NOT NULL,
+tipo_de_usuario VARCHAR(50) NOT NULL
+);
+ALTER TABLE usuario AUTO_INCREMENT = 1000;
+
+CREATE TABLE detalle_pedido(
+id INTEGER PRIMARY KEY AUTO_INCREMENT,
+fecha_pedido DATE NOT NULL,
+hora_pedido TIME NOT NULL,
+forma_de_pago VARCHAR(50) NOT NULL,
+ciudad VARCHAR(50) NOT NULL,
+direccion VARCHAR(255) NOT NULL,
+estado VARCHAR(25) NOT NULL
+);
+ALTER TABLE detalle_pedido AUTO_INCREMENT = 1000;
+
+CREATE TABLE pedido(
+id INTEGER PRIMARY KEY AUTO_INCREMENT,
+id_detallepedido INTEGER,
+FOREIGN KEY (id_detallepedido) REFERENCES detalle_pedido(id) ON DELETE CASCADE ON UPDATE CASCADE,
+id_producto INTEGER NOT NULL,
+FOREIGN KEY (id_producto) REFERENCES producto(id) ON DELETE CASCADE ON UPDATE CASCADE,
+id_usuario INTEGER NOT NULL,
+FOREIGN KEY (id_usuario) REFERENCES usuario(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+ALTER TABLE pedido AUTO_INCREMENT = 1000;
+
