@@ -32,7 +32,8 @@ public class    SecurityConfig {
                             customizeRequests
                                     .requestMatchers("/api/login").permitAll()
                                     .requestMatchers("/api/obtener-productos").permitAll()
-                                    .requestMatchers("api/obtener-producto/{id}").permitAll()
+                                    .requestMatchers("/api/obtener-producto/{id}").permitAll()
+                                    .requestMatchers("/api/registrar-pedido").hasAnyRole("CUSTOMER","ADMIN")
                                     .requestMatchers("/api/**").hasAnyRole("ADMIN")
                                     .anyRequest()
                                     .authenticated();
