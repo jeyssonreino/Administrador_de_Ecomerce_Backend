@@ -1,6 +1,7 @@
 package com.example.ecomerce.service;
 
 import com.example.ecomerce.dao.PedidoDao;
+import com.example.ecomerce.models.CarritoDTO;
 import com.example.ecomerce.models.Pedido;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,9 @@ public class PedidoService {
     public void eliminarPedidoPorId(int id){
         pedidoDao.deleteById(id);
     }
+
+    //Método para obtener un listado de productos para el carrito por Id de usuario
+    public List<CarritoDTO> obtenerCarritoPorIdUser(int idUser){return pedidoDao.ListarCarritoPorIdUser(idUser);}
 
 
 }

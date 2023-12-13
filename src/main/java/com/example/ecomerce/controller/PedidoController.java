@@ -1,7 +1,9 @@
 package com.example.ecomerce.controller;
 
 
+import com.example.ecomerce.models.CarritoDTO;
 import com.example.ecomerce.models.Pedido;
+import com.example.ecomerce.models.UsuarioDTOA;
 import com.example.ecomerce.service.PedidoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -83,6 +85,21 @@ public class PedidoController {
                 return new ResponseEntity<>("Pedido actualizado correctamente", HttpStatus.OK);
             }else {
                 return new ResponseEntity<>("El pedido con Id: " + id + " no ha sido encontrado", HttpStatus.NOT_FOUND);
+            }
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    //Endpoint GET para obtener el carrito por Id del usuario
+    @GetMapping("/obtener-carrito/{idUser}")
+    public ResponseEntity<List<CarritoDTO>> obtenerCarritoPorIdUsuario(@PathVariable int idUser){
+        try{
+            List<CarritoDTO> carrito = pedidoService.obtenerCarritoPorIdUser(idUser);
+            if (!carrito.isEmpty()){
+                return new ResponseEntity<>(carrito, HttpStatus.OK);
+            }else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
