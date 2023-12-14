@@ -65,7 +65,8 @@ hora_pedido TIME NOT NULL,
 forma_de_pago VARCHAR(50) NOT NULL,
 ciudad VARCHAR(50) NOT NULL,
 direccion VARCHAR(255) NOT NULL,
-estado VARCHAR(25) NOT NULL
+estado VARCHAR(25) NOT NULL,
+id_usuario INTEGER NOT NULL
 );
 ALTER TABLE detalle_pedido AUTO_INCREMENT = 1000;
 

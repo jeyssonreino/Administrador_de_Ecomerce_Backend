@@ -13,6 +13,7 @@ public interface PedidoDao extends JpaRepository<Pedido, Integer> {
 
     //Método para obtener los pedidos y mostralos el carrito por el Id del usuario
     @Query(value = "SELECT pe.id AS idPedido,\n" +
+            "pe.id_detallepedido AS idDetallePedido,\n" +
             "pe.id_producto AS idProducto,\n" +
             "pe.id_usuario AS idUsuario,\n" +
             "p.nombre AS nombreProducto,\n" +

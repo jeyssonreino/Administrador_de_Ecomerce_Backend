@@ -19,6 +19,8 @@ import java.util.List;
         private String ciudad;
         private String direccion;
         private String estado;
+        @Column(name = "id_usuario")
+        private int idUsuario;
 
 
     public int getId() {
@@ -77,5 +79,11 @@ import java.util.List;
         this.estado = estado;
     }
 
+    public int getIdUsuario() {
+        return idUsuario;
+    }
 
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 }

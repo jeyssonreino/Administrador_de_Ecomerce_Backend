@@ -24,7 +24,7 @@ public class DetallePedidoController {
     public ResponseEntity<String> guardarDetallePedido(@RequestBody DetallePedido detallePedido){
         try{
             DetallePedido nuevoDetallePedido = detallePedidoService.guardarDetallePedido(detallePedido);
-            return new ResponseEntity<>("Detalle del pedido guardado con exito", HttpStatus.CREATED);
+            return new ResponseEntity<>("Detalle del pedido guardado con exito", HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
