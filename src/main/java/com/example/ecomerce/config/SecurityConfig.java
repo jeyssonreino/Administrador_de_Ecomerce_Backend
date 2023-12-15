@@ -37,6 +37,7 @@ public class    SecurityConfig {
                                     .requestMatchers("/api/obtener-carrito/{idUser}").hasAnyRole("CUSTOMER","ADMIN")
                                     .requestMatchers("/api/eliminar-pedido/{id}").hasAnyRole("CUSTOMER","ADMIN")
                                     .requestMatchers("/api/registrar-detallepedido").hasAnyRole("CUSTOMER","ADMIN")
+                                    .requestMatchers("/api/obtener-usuario/{id}").hasAnyRole("CUSTOMER","ADMIN")
                                     .requestMatchers("/api/**").hasAnyRole("ADMIN")
                                     .anyRequest()
                                     .authenticated();
