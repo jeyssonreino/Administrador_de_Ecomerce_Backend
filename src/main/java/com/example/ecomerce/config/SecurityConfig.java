@@ -33,6 +33,7 @@ public class    SecurityConfig {
                                     .requestMatchers("/api/login").permitAll()
                                     .requestMatchers("/api/obtener-productos").permitAll()
                                     .requestMatchers("/api/obtener-producto/{id}").permitAll()
+                                    .requestMatchers("/api/registrar-usuario").permitAll()
                                     .requestMatchers("/api/registrar-pedido").hasAnyRole("CUSTOMER","ADMIN")
                                     .requestMatchers("/api/obtener-carrito/{idUser}").hasAnyRole("CUSTOMER","ADMIN")
                                     .requestMatchers("/api/eliminar-pedido/{id}").hasAnyRole("CUSTOMER","ADMIN")

@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,9 +26,12 @@ public class UsuarioController {
     @PostMapping("/registrar-usuario")
     public ResponseEntity<String> guardarUsuario(@RequestBody Usuario usuario) {
         try {
+            usuario.setFechayHoraDeRegistro(LocalDateTime.now());
+            usuario.setTipoUsuario("CUSTOMER");
             Usuario nuevoUsuario = usuarioService.guardarUsuario(usuario);
-            return new ResponseEntity<>("Usuario guardado con exito", HttpStatus.CREATED);
+            return new ResponseEntity<>("Usuario guardado con exito", HttpStatus.OK);
         } catch (Exception e) {
+            System.out.println("Este error:" +  e);
             return new ResponseEntity<>("Error al guardar el usuario " + e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
