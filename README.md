@@ -7,7 +7,7 @@ configura perimisos para cada tipo de usuarios (ADMIN, CUSTOMER) por cada Endpoi
 
 Seguridad basada en Tokens desarrollado con Spring JWT.
 
-Encriptación de contraseñas de usaurios Bycript
+Encriptación de contraseñas de usuarios Bycript
 
 CORS solo para peticiones desde htttp://localhost/4200.
 
