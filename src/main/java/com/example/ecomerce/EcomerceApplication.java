@@ -8,7 +8,6 @@ public class EcomerceApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(EcomerceApplication.class, args);
-		System.out.println("By: Jeysson Reino");
 	}
 
 }
