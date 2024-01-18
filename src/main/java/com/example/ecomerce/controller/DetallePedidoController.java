@@ -1,6 +1,9 @@
 package com.example.ecomerce.controller;
 
 import com.example.ecomerce.models.DetallePedido;
+import com.example.ecomerce.models.DetallePedidoDTO;
+import com.example.ecomerce.models.ProductosDelPedidoDTO;
+import com.example.ecomerce.models.TotalDelPedidoDTO;
 import com.example.ecomerce.service.DetallePedidoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -58,7 +61,6 @@ public class DetallePedidoController {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         }catch (Exception e){
-            System.out.println(e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -87,6 +89,50 @@ public class DetallePedidoController {
             }
         }catch (Exception e){
             return new ResponseEntity<>("Error al actualizar el detalle del pedido" + e, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    //Método get para obtener la informacion del detalle de un pedido con interseccion de tablas con el cliente mediante el Id del detalle del pedido
+    @GetMapping("/obtenerDetallePedidoPorId/{id}")
+    public ResponseEntity<DetallePedidoDTO> obtenerDetallePedidoPorId(@PathVariable Integer id){
+        try{
+            DetallePedidoDTO detallePedidoDTO = detallePedidoService.obtenerDetallePedidoPorId(id);
+            if(detallePedidoDTO != null){
+                return new ResponseEntity<>(detallePedidoDTO, HttpStatus.OK);
+            }else{
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/obtenerProductosDelPedidoPorId/{id}")
+    public ResponseEntity<List<ProductosDelPedidoDTO>> obtenerProductosDelDetalleDelPedido(@PathVariable Integer id){
+        try{
+            List<ProductosDelPedidoDTO> productosDelPedidoDTO = detallePedidoService.obtenerProductosDelPedidoPorId(id);
+            if (!productosDelPedidoDTO.isEmpty()){
+                return new ResponseEntity<>(productosDelPedidoDTO,HttpStatus.OK);
+            }else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/obtenerTotalDelDetalleDelPedido/{id}")
+    public ResponseEntity<TotalDelPedidoDTO> obtenerTotalDelDetalleDelPedido(@PathVariable Integer id){
+        try{
+            TotalDelPedidoDTO totalDelPedidoDTO = detallePedidoService.obtenerTotalDelDetalleDelPedido(id);
+            if (totalDelPedidoDTO != null){
+                return new ResponseEntity<>(totalDelPedidoDTO,HttpStatus.OK);
+            }else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }catch (Exception e){
+            System.out.println(e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

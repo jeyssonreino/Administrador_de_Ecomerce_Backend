@@ -41,6 +41,9 @@ public class    SecurityConfig {
                                     .requestMatchers("/api/eliminar-pedido/{id}").hasAnyRole("CUSTOMER","ADMIN")
                                     .requestMatchers("/api/registrar-detallepedido").hasAnyRole("CUSTOMER","ADMIN")
                                     .requestMatchers("/api/obtener-usuario/{id}").hasAnyRole("CUSTOMER","ADMIN")
+                                    .requestMatchers("/api/obtenerDetallePedidoPorId/{id}").hasAnyRole("ADMIN")
+                                    .requestMatchers("/api/obtenerProductosDelPedidoPorId/{id}").hasAnyRole("ADMIN")
+                                    .requestMatchers("/api/obtenerTotalDelDetalleDelPedido/{id}").hasAnyRole("ADMIN")
                                     .requestMatchers("/api/**").hasAnyRole("ADMIN")
                                     .anyRequest()
                                     .authenticated();

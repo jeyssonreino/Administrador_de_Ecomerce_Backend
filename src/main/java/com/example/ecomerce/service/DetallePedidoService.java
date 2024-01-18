@@ -1,8 +1,7 @@
 package com.example.ecomerce.service;
 
 import com.example.ecomerce.dao.DetallePedidoDao;
-import com.example.ecomerce.models.DetallePedido;
-import com.example.ecomerce.models.Pedido;
+import com.example.ecomerce.models.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,4 +33,19 @@ public class DetallePedidoService {
     public void eliminarDetallePedidoPorId(int id){
         detallePedidoDao.deleteById(id);
     }
+
+    //Método para mostrar un detalle del pedido por Id con tablas cruzadas
+    public DetallePedidoDTO obtenerDetallePedidoPorId(Integer id){
+        return detallePedidoDao.obtenerIformacionDePedidoPorId(id);
+    };
+
+    //Método para mostrar todos los productos de un pedido en especifico por su Id del detalle del pedido
+    public List<ProductosDelPedidoDTO> obtenerProductosDelPedidoPorId(Integer id){
+        return detallePedidoDao.obtenerProductosDelPedidoPorId(id);
+    };
+
+    //Método para obtener el total del pedido mediante el Id del detalle del pedido
+    public TotalDelPedidoDTO obtenerTotalDelDetalleDelPedido(Integer id){
+        return detallePedidoDao.obtenerTotalDelPedido(id);
+    };
 }
