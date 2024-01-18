@@ -1,0 +1,18 @@
+/*Disparador de la tabla detalle_pedido
+ By: JEYSSON REINO*/
+
+DELIMITER ;;
+AFTER INSERT ON detalle_pedido FOR EACH ROW
+BEGIN
+  DECLARE id_usuario_detalle_pedido INT;
+  DECLARE id_detalle_pedido INT;
+
+  -- Obtener los valores necesarios del nuevo detalle_pedido
+  SELECT NEW.id_usuario, NEW.id INTO id_usuario_detalle_pedido, id_detalle_pedido;
+
+  -- Actualizar la columna id_detallepedido en la tabla pedido
+  UPDATE pedido
+  SET id_detallepedido = id_detalle_pedido
+  WHERE id_usuario = id_usuario_detalle_pedido;
+END */;;
+DELIMITER ;
