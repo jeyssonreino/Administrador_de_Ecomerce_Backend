@@ -5,6 +5,9 @@ import com.example.ecomerce.models.DetallePedidoDTO;
 import com.example.ecomerce.models.ProductosDelPedidoDTO;
 import com.example.ecomerce.models.TotalDelPedidoDTO;
 import com.example.ecomerce.service.DetallePedidoService;
+import com.sun.mail.iap.ByteArray;
+import jakarta.annotation.Resource;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -134,5 +137,10 @@ public class DetallePedidoController {
             System.out.println(e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/generar-factura/{id}")
+    public ResponseEntity<ByteArrayResource> generarFacturaDePedido(@PathVariable Integer id){
+        return this.detallePedidoService.generarFacturaByIde(id);
     }
 }
