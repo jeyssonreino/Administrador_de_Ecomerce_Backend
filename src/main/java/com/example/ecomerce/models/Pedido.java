@@ -18,6 +18,9 @@ public class Pedido {
     @Column(name = "id_usuario")
     private Integer idUsuario;
 
+    @Column(name = "cantidad")
+    private Integer cantidad;
+
 
     public Integer getId() {
         return id;
@@ -51,5 +54,11 @@ public class Pedido {
         this.idUsuario = idUsuario;
     }
 
+    public Integer getCantidad() {
+        return cantidad;
+    }
 
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
+    }
 }

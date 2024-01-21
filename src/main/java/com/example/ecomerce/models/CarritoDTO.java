@@ -6,6 +6,7 @@ public interface CarritoDTO {
     Integer getIdDetallePedido();
     int getIdProducto();
     int getIdUsuario();
+    Integer getCantidad();
     String getNombreProducto();
     double getPrecioProducto();
     double getDescuentoProducto();
