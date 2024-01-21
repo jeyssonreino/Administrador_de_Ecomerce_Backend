@@ -30,21 +30,34 @@ public interface DetallePedidoDao extends JpaRepository<DetallePedido, Integer> 
     DetallePedidoDTO obtenerIformacionDePedidoPorId(@Param("id") Integer id);
 
     //Método para obtener los productos comprados de un detalle del pedido mediante el Id del detalle pedido
-    @Query(value = "SELECT p.id AS id,\n" +
-            "p.nombre AS nombre,\n" +
-            "p.descuento AS descuento,\n" +
-            "p.precio AS precio,\n" +
-            "FORMAT(p.precio -((p.precio * p.descuento)/100),2) AS descuentoProducto\n" +
-            "FROM producto p \n" +
-            "INNER JOIN pedido pe ON pe.id_producto = p.id\n" +
-            "INNER JOIN detalle_pedido dp ON pe.id_detallepedido = dp.id  WHERE dp.estado = \"Comprado\" AND dp.id = :id", nativeQuery = true)
+    @Query(value = "SELECT \n" +
+            "    p.id AS id,\n" +
+            "    p.nombre AS nombre,\n" +
+            "    p.descuento AS descuento,\n" +
+            "    p.precio AS precio,\n" +
+            "    pe.cantidad AS cantidad,\n" +
+            "    FORMAT((p.precio - ((p.precio * p.descuento) / 100))*pe.cantidad, 2) AS descuentoProducto\n" +
+            "FROM \n" +
+            "    producto p\n" +
+            "INNER JOIN \n" +
+            "    pedido pe ON pe.id_producto = p.id\n" +
+            "INNER JOIN \n" +
+            "    detalle_pedido dp ON pe.id_detallepedido = dp.id  \n" +
+            "WHERE \n" +
+            "    dp.estado = 'Comprado' AND dp.id = :id", nativeQuery = true)
     List<ProductosDelPedidoDTO> obtenerProductosDelPedidoPorId(@Param("id") Integer id);
 
     //Método para obtener el total de precios teniendo en cuenta el descuento de estos de un detalle del pedido en especifico mediante su Id
-    @Query(value = "SELECT FORMAT(SUM(p.precio -((p.precio * p.descuento)/100)),2) AS Total\n" +
-            "FROM producto p \n" +
-            "INNER JOIN pedido pe ON pe.id_producto = p.id\n" +
-            "INNER JOIN detalle_pedido dp ON pe.id_detallepedido = dp.id  WHERE dp.estado = \"Comprado\" AND dp.id = :id", nativeQuery = true)
+    @Query(value = "SELECT \n" +
+            "    FORMAT(SUM((p.precio - ((p.precio * p.descuento) / 100))* pe.cantidad), 2) AS Total\n" +
+            "FROM \n" +
+            "    producto p\n" +
+            "INNER JOIN \n" +
+            "    pedido pe ON pe.id_producto = p.id\n" +
+            "INNER JOIN \n" +
+            "    detalle_pedido dp ON pe.id_detallepedido = dp.id  \n" +
+            "WHERE \n" +
+            "    dp.estado = 'Comprado' AND dp.id = :id", nativeQuery = true)
     TotalDelPedidoDTO obtenerTotalDelPedido(@Param("id") Integer id);
 
 

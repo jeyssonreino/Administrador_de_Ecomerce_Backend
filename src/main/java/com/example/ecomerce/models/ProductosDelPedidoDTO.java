@@ -6,5 +6,6 @@ public interface ProductosDelPedidoDTO {
     String getNombre();
     double getDescuento();
     double getPrecio();
+    Integer getCantidad();
     String getDescuentoProducto();
 }
